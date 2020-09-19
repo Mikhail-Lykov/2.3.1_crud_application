@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User</title>
+</head>
+<body>
+<div style="text-align: right;padding:5px;margin:5px 0px;background:#ccc;">
+    <a th:href="@{/users/{id}(id=${user.id},lang='en')}">EN</a>
+    &nbsp;|&nbsp;
+    <a th:href="@{/users/{id}(id=${user.id},lang='ru')}">RU</a>
+</div>
+<div>
+    <form th:method="POST" th:action="@{/users}" th:object="${user}">
+        <input type="hidden" id="id" th:field="*{id}">
+        <table>
+            <tr>
+                <td><label for="name" th:text="#{th.name} + ':'">Name:</label></td>
+                <td><input type="text" th:field="*{name}" id="name" th:value="${user.name}"></td>
+            </tr>
+            <tr>
+                <td><label for="surname" th:text="#{th.surname} + ':'">Last name:</label></td>
+                <td><input type="text" th:field="*{surname}" id="surname" th:value="${user.surname}"></td>
+            </tr>
+            <tr>
+                <td><label for="age" th:text="#{th.age} + ':'">Age:</label></td>
+                <td><input type="text" th:field="*{age}" id="age" th:value="${user.age}"></td>
+            </tr>
+        </table>
+        <br/>
+        <input type="submit" th:value="#{button.edit}" style="float: left; margin-right: 20px">
+    </form>
+    <form th:method="POST" th:action="@{/users/{id}(id=${user.id})}" th:object="${user}">
+        <input type="submit" th:value="#{button.del}">
+    </form>
+</div>
+</body>
+</html>
